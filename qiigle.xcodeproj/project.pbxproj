@@ -14,6 +14,7 @@
 		550D2E4422DA13BC00846D87 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4322DA13BC00846D87 /* SnapKit.framework */; };
 		550D2E4622DA13CD00846D87 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4522DA13CD00846D87 /* Kingfisher.framework */; };
 		550D2E4822DA13D900846D87 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4722DA13D900846D87 /* SwiftyUserDefaults.framework */; };
+		550D2E4C22DA151500846D87 /* TextStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E4B22DA151500846D87 /* TextStyle.swift */; };
 		55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */; };
 		55A3E3BB22DA0C2F00D45775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */; };
 		55A3E3BE22DA0C2F00D45775 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BC22DA0C2F00D45775 /* LaunchScreen.storyboard */; };
@@ -35,6 +36,7 @@
 		550D2E4322DA13BC00846D87 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		550D2E4522DA13CD00846D87 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
 		550D2E4722DA13D900846D87 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyUserDefaults.framework; path = Carthage/Build/iOS/SwiftyUserDefaults.framework; sourceTree = "<group>"; };
+		550D2E4B22DA151500846D87 /* TextStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextStyle.swift; sourceTree = "<group>"; };
 		55A3E3B022DA0C2E00D45775 /* qiigle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qiigle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			children = (
 				55A3E3C622DA0E6400D45775 /* DeviceSize.swift */,
 				55A3E3C922DA0E6400D45775 /* Color.swift */,
+				550D2E4B22DA151500846D87 /* TextStyle.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550D2E4C22DA151500846D87 /* TextStyle.swift in Sources */,
 				55A3E3D822DA0EBC00D45775 /* UIView+Extension.swift in Sources */,
 				55A3E3DB22DA0EBC00D45775 /* Observable+Optional.swift in Sources */,
 				55A3E3DA22DA0EBC00D45775 /* ReactorKitView.swift in Sources */,
