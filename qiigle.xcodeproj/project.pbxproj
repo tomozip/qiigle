@@ -7,7 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C40D768F9B2BFE631E79643 /* Pods_qiigle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E648685A1F773FC515D3365 /* Pods_qiigle.framework */; };
 		550D2E3C22DA11F400846D87 /* ViewConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E3B22DA11F400846D87 /* ViewConstructor.swift */; };
+		550D2E4022DA125100846D87 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E3F22DA125100846D87 /* HomeViewController.swift */; };
+		550D2E4222DA12A600846D87 /* HomeViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E4122DA12A600846D87 /* HomeViewReactor.swift */; };
+		550D2E4422DA13BC00846D87 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4322DA13BC00846D87 /* SnapKit.framework */; };
+		550D2E4622DA13CD00846D87 /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4522DA13CD00846D87 /* Kingfisher.framework */; };
+		550D2E4822DA13D900846D87 /* SwiftyUserDefaults.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4722DA13D900846D87 /* SwiftyUserDefaults.framework */; };
 		55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */; };
 		55A3E3BB22DA0C2F00D45775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */; };
 		55A3E3BE22DA0C2F00D45775 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BC22DA0C2F00D45775 /* LaunchScreen.storyboard */; };
@@ -21,7 +27,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		203D3D5553BF1872E8851DA5 /* Pods-qiigle.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qiigle.debug.xcconfig"; path = "Target Support Files/Pods-qiigle/Pods-qiigle.debug.xcconfig"; sourceTree = "<group>"; };
+		4E648685A1F773FC515D3365 /* Pods_qiigle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_qiigle.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		550D2E3B22DA11F400846D87 /* ViewConstructor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewConstructor.swift; sourceTree = "<group>"; };
+		550D2E3F22DA125100846D87 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		550D2E4122DA12A600846D87 /* HomeViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewReactor.swift; sourceTree = "<group>"; };
+		550D2E4322DA13BC00846D87 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		550D2E4522DA13CD00846D87 /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		550D2E4722DA13D900846D87 /* SwiftyUserDefaults.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyUserDefaults.framework; path = Carthage/Build/iOS/SwiftyUserDefaults.framework; sourceTree = "<group>"; };
 		55A3E3B022DA0C2E00D45775 /* qiigle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qiigle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -34,6 +47,7 @@
 		55A3E3D122DA0EBC00D45775 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		55A3E3D322DA0EBC00D45775 /* ReactorKitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactorKitView.swift; sourceTree = "<group>"; };
 		55A3E3D522DA0EBC00D45775 /* Observable+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Optional.swift"; sourceTree = "<group>"; };
+		FC6395D909C4A9361610CE0A /* Pods-qiigle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qiigle.release.xcconfig"; path = "Target Support Files/Pods-qiigle/Pods-qiigle.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +55,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				550D2E4822DA13D900846D87 /* SwiftyUserDefaults.framework in Frameworks */,
+				550D2E4622DA13CD00846D87 /* Kingfisher.framework in Frameworks */,
+				550D2E4422DA13BC00846D87 /* SnapKit.framework in Frameworks */,
+				0C40D768F9B2BFE631E79643 /* Pods_qiigle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,11 +73,30 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
+		550D2E3D22DA124300846D87 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				550D2E3E22DA124800846D87 /* Home */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		550D2E3E22DA124800846D87 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				550D2E3F22DA125100846D87 /* HomeViewController.swift */,
+				550D2E4122DA12A600846D87 /* HomeViewReactor.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		55A3E3A722DA0C2E00D45775 = {
 			isa = PBXGroup;
 			children = (
 				55A3E3B222DA0C2E00D45775 /* qiigle */,
 				55A3E3B122DA0C2E00D45775 /* Products */,
+				AA2BF9E506049E29DF1F7E30 /* Pods */,
+				8A8F3FD0FD9509F57BD4AEA7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +114,7 @@
 				55A3E3CE22DA0EBC00D45775 /* Extension */,
 				550D2E3A22DA11F400846D87 /* Protocol */,
 				55A3E3C522DA0E6400D45775 /* Utility */,
+				550D2E3D22DA124300846D87 /* UI */,
 				55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */,
 				55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */,
 				55A3E3BC22DA0C2F00D45775 /* LaunchScreen.storyboard */,
@@ -114,6 +152,26 @@
 			path = Rx;
 			sourceTree = "<group>";
 		};
+		8A8F3FD0FD9509F57BD4AEA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				550D2E4722DA13D900846D87 /* SwiftyUserDefaults.framework */,
+				550D2E4522DA13CD00846D87 /* Kingfisher.framework */,
+				550D2E4322DA13BC00846D87 /* SnapKit.framework */,
+				4E648685A1F773FC515D3365 /* Pods_qiigle.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AA2BF9E506049E29DF1F7E30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				203D3D5553BF1872E8851DA5 /* Pods-qiigle.debug.xcconfig */,
+				FC6395D909C4A9361610CE0A /* Pods-qiigle.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -121,9 +179,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 55A3E3C222DA0C2F00D45775 /* Build configuration list for PBXNativeTarget "qiigle" */;
 			buildPhases = (
+				0435489B25DEE230FBB79BCD /* [CP] Check Pods Manifest.lock */,
 				55A3E3AC22DA0C2E00D45775 /* Sources */,
 				55A3E3AD22DA0C2E00D45775 /* Frameworks */,
 				55A3E3AE22DA0C2E00D45775 /* Resources */,
+				D0144BC195531EC1F863C8AB /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -179,6 +239,63 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0435489B25DEE230FBB79BCD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-qiigle-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D0144BC195531EC1F863C8AB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-qiigle/Pods-qiigle-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/R.swift.Library/Rswift.framework",
+				"${BUILT_PRODUCTS_DIR}/ReactorKit/ReactorKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ReusableKit/ReusableKit.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Then/Then.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Rswift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReactorKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReusableKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Then.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-qiigle/Pods-qiigle-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		55A3E3AC22DA0C2E00D45775 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -189,10 +306,12 @@
 				55A3E3DA22DA0EBC00D45775 /* ReactorKitView.swift in Sources */,
 				550D2E3C22DA11F400846D87 /* ViewConstructor.swift in Sources */,
 				55A3E3CA22DA0E6400D45775 /* DeviceSize.swift in Sources */,
+				550D2E4022DA125100846D87 /* HomeViewController.swift in Sources */,
 				55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */,
 				55A3E3CD22DA0E6400D45775 /* Color.swift in Sources */,
 				55A3E3D722DA0EBC00D45775 /* UIButton+Extension.swift in Sources */,
 				55A3E3D622DA0EBC00D45775 /* UIColor+Extension.swift in Sources */,
+				550D2E4222DA12A600846D87 /* HomeViewReactor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,10 +447,15 @@
 		};
 		55A3E3C322DA0C2F00D45775 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 203D3D5553BF1872E8851DA5 /* Pods-qiigle.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MN5DP9MBB2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = qiigle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -346,10 +470,15 @@
 		};
 		55A3E3C422DA0C2F00D45775 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FC6395D909C4A9361610CE0A /* Pods-qiigle.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MN5DP9MBB2;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = qiigle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
