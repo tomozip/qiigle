@@ -10,6 +10,13 @@
 		55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */; };
 		55A3E3BB22DA0C2F00D45775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */; };
 		55A3E3BE22DA0C2F00D45775 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BC22DA0C2F00D45775 /* LaunchScreen.storyboard */; };
+		55A3E3CA22DA0E6400D45775 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3C622DA0E6400D45775 /* DeviceSize.swift */; };
+		55A3E3CD22DA0E6400D45775 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3C922DA0E6400D45775 /* Color.swift */; };
+		55A3E3D622DA0EBC00D45775 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3CF22DA0EBC00D45775 /* UIColor+Extension.swift */; };
+		55A3E3D722DA0EBC00D45775 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D022DA0EBC00D45775 /* UIButton+Extension.swift */; };
+		55A3E3D822DA0EBC00D45775 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D122DA0EBC00D45775 /* UIView+Extension.swift */; };
+		55A3E3DA22DA0EBC00D45775 /* ReactorKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D322DA0EBC00D45775 /* ReactorKitView.swift */; };
+		55A3E3DB22DA0EBC00D45775 /* Observable+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D522DA0EBC00D45775 /* Observable+Optional.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +25,13 @@
 		55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55A3E3BD22DA0C2F00D45775 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55A3E3BF22DA0C2F00D45775 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55A3E3C622DA0E6400D45775 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
+		55A3E3C922DA0E6400D45775 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		55A3E3CF22DA0EBC00D45775 /* UIColor+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		55A3E3D022DA0EBC00D45775 /* UIButton+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
+		55A3E3D122DA0EBC00D45775 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		55A3E3D322DA0EBC00D45775 /* ReactorKitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactorKitView.swift; sourceTree = "<group>"; };
+		55A3E3D522DA0EBC00D45775 /* Observable+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Optional.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,12 +64,43 @@
 		55A3E3B222DA0C2E00D45775 /* qiigle */ = {
 			isa = PBXGroup;
 			children = (
+				55A3E3CE22DA0EBC00D45775 /* Extension */,
+				55A3E3C522DA0E6400D45775 /* Utility */,
 				55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */,
 				55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */,
 				55A3E3BC22DA0C2F00D45775 /* LaunchScreen.storyboard */,
 				55A3E3BF22DA0C2F00D45775 /* Info.plist */,
 			);
 			path = qiigle;
+			sourceTree = "<group>";
+		};
+		55A3E3C522DA0E6400D45775 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				55A3E3C622DA0E6400D45775 /* DeviceSize.swift */,
+				55A3E3C922DA0E6400D45775 /* Color.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		55A3E3CE22DA0EBC00D45775 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				55A3E3D422DA0EBC00D45775 /* Rx */,
+				55A3E3CF22DA0EBC00D45775 /* UIColor+Extension.swift */,
+				55A3E3D022DA0EBC00D45775 /* UIButton+Extension.swift */,
+				55A3E3D122DA0EBC00D45775 /* UIView+Extension.swift */,
+				55A3E3D322DA0EBC00D45775 /* ReactorKitView.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		55A3E3D422DA0EBC00D45775 /* Rx */ = {
+			isa = PBXGroup;
+			children = (
+				55A3E3D522DA0EBC00D45775 /* Observable+Optional.swift */,
+			);
+			path = Rx;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,7 +173,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55A3E3D822DA0EBC00D45775 /* UIView+Extension.swift in Sources */,
+				55A3E3DB22DA0EBC00D45775 /* Observable+Optional.swift in Sources */,
+				55A3E3DA22DA0EBC00D45775 /* ReactorKitView.swift in Sources */,
+				55A3E3CA22DA0E6400D45775 /* DeviceSize.swift in Sources */,
 				55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */,
+				55A3E3CD22DA0E6400D45775 /* Color.swift in Sources */,
+				55A3E3D722DA0EBC00D45775 /* UIButton+Extension.swift in Sources */,
+				55A3E3D622DA0EBC00D45775 /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
