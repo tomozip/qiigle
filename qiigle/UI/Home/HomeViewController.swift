@@ -30,24 +30,16 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
 
     // MARK: - Views
 
-    private lazy var headerView = UIView().then {
+    private let headerView = UIView().then {
         $0.backgroundColor = Color.primaryColor
     }
 
-    private let flowLayout = UICollectionViewFlowLayout().then {
-        $0.itemSize = ArticleCell.Const.cellSize
-        $0.scrollDirection = .vertical
-        $0.minimumLineSpacing = ArticleCell.Const.minimumLineSpacing
-        $0.minimumInteritemSpacing = ArticleCell.Const.minimumLineSpacing
-        $0.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
-    }
-
-    private lazy var titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.text = "Qiigle"
         $0.apply(isBold: true, size: 40, color: Color.primaryColor)
     }
 
-    private lazy var searchField = TextField().then {
+    private let searchField = TextField().then {
         $0.placeholder = "キーワードを入力"
         $0.returnKeyType = .search
         $0.clearButtonMode = .always
@@ -56,12 +48,32 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         $0.layer.cornerRadius = 10
     }
 
+    private lazy var loadingView = UIView().then {
+        $0.backgroundColor = UIColor.init(hex: "FFFFFF", alpha: 0.5)
+        $0.addSubview(activityIndicator)
+    }
+
+    private let activityIndicator = UIActivityIndicatorView().then {
+        $0.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        $0.style = UIActivityIndicatorView.Style.gray
+        $0.startAnimating()
+    }
+
+    private let flowLayout = UICollectionViewFlowLayout().then {
+        $0.itemSize = ArticleCell.Const.cellSize
+        $0.scrollDirection = .vertical
+        $0.minimumLineSpacing = ArticleCell.Const.minimumLineSpacing
+        $0.minimumInteritemSpacing = ArticleCell.Const.minimumLineSpacing
+        $0.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        $0.footerReferenceSize = CGSize(width: DeviceSize.screenWidth, height: 0)
+    }
+
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout).then {
         $0.backgroundColor = .clear
         $0.alwaysBounceVertical = true
-        $0.showsVerticalScrollIndicator = false
         $0.contentInsetAdjustmentBehavior = .never
         $0.register(Reusable.articleCell)
+        $0.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CartFooterCollectionReusableView")
         $0.dataSource = self
         $0.delegate = self
     }
@@ -86,6 +98,7 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         view.addSubview(titleLabel)
         view.addSubview(searchField)
         view.addSubview(collectionView)
+        view.addSubview(loadingView)
     }
 
     func setupViewConstraints() {
@@ -97,6 +110,12 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             $0.height.equalTo(36)
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.left.right.equalToSuperview().inset(16)
+        }
+        loadingView.snp.makeConstraints {
+            $0.edges.equalTo(collectionView)
+        }
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
         collectionView.snp.makeConstraints {
             $0.top.equalTo(searchField.snp.bottom)
@@ -118,6 +137,12 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
                 print(article.title)
             }
             .disposed(by: disposeBag)
+
+        collectionView.rx_reachedBottom.bind { [weak self] (_) in
+            guard self?.reactor?.currentState.isLoadingNewPage == false else { return }
+            print("reached")
+            self?.reactor?.action.onNext(.loadNewPage)
+        }.disposed(by: disposeBag)
 
         searchField.rx.controlEvent(.editingDidEndOnExit).subscribe { [weak self] _ in
             self?.reactor?.action.onNext(.loadArticles)
@@ -149,6 +174,17 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
                 self?.collectionView.reloadData()
             }
             .disposed(by: disposeBag)
+
+        reactor.state.map { $0.isLoading }
+            .bind { [weak self] isLoading in
+                self?.loadingView.isHidden = !isLoading
+            }
+            .disposed(by: disposeBag)
+
+        reactor.state.map { $0.isLoadingNewPage }
+            .bind { [weak self] isLoading in
+                self?.flowLayout.footerReferenceSize = CGSize(width: DeviceSize.screenWidth, height: (isLoading ? 100 : 0))
+            }.disposed(by: disposeBag)
 
 //        reactor.state.map { $0.users.count.description }
 //            .bind(to: countLabel.rx.text)
@@ -188,5 +224,27 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return collectionView.dequeue(Reusable.articleCell, for: indexPath).then {
             $0.setupArticleInfo(article: article)
         }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+
+        if (kind == UICollectionView.elementKindSectionFooter) {
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CartFooterCollectionReusableView", for: indexPath)
+
+            let activityIndicator = UIActivityIndicatorView(style: .gray)
+            activityIndicator.startAnimating()
+            footerView.addSubview(activityIndicator)
+            activityIndicator.snp.makeConstraints {
+                $0.centerY.equalToSuperview().offset(-10)
+                $0.centerX.equalToSuperview()
+            }
+
+            return footerView
+        } else if (kind == UICollectionView.elementKindSectionHeader) {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CartHeaderCollectionReusableView", for: indexPath)
+            // Customize headerView here
+            return headerView
+        }
+        fatalError()
     }
 }

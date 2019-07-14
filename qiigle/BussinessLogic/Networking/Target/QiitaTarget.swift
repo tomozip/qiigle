@@ -18,8 +18,8 @@ extension String {
 }
 
 enum QiitaTarget {
-    case articles(String)
-    case trends
+    case articles(String, Int)
+    case trends(Int)
 }
 
 extension QiitaTarget: TargetType {
@@ -35,10 +35,10 @@ extension QiitaTarget: TargetType {
     }
     var task: Task {
         switch self {
-        case .articles(let query):
-            return .requestParameters(parameters: ["query": query, "page": "1", "per_page": "20"], encoding: URLEncoding.queryString)
-        case .trends:
-            return .requestParameters(parameters: ["query": "stocks:>20 created:>2018-03-01", "page": "1", "per_page": "20"], encoding: URLEncoding.queryString)
+        case let .articles(query, page):
+            return .requestParameters(parameters: ["query": query, "page": page, "per_page": "20"], encoding: URLEncoding.queryString)
+        case let .trends(page):
+            return .requestParameters(parameters: ["query": "stocks:>20 created:>2018-03-01", "page": page, "per_page": "20"], encoding: URLEncoding.queryString)
         }
     }
     var headers: [String : String]? { return nil }

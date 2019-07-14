@@ -25,12 +25,12 @@ final class ArticleCell: UICollectionViewCell, ViewConstructor {
 
     // MARK: - Views
 
-    private lazy var titleLabel = UILabel().then {
+    private let titleLabel = UILabel().then {
         $0.numberOfLines = 2
         $0.apply(isBold: true, size: 16, color: Color.textColor)
     }
 
-    private lazy var userImageView = UIImageView().then {
+    private let userImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 4
@@ -43,15 +43,15 @@ final class ArticleCell: UICollectionViewCell, ViewConstructor {
         $0.addSubview(createdAtLabel)
     }
 
-    private lazy var writerPrefixLabel = UILabel().then {
+    private let writerPrefixLabel = UILabel().then {
         $0.text = "by"
         $0.apply(size: 12, color: Color.lightTextColor)
     }
-    private lazy var userNameLabel = UILabel().then {
+    private let userNameLabel = UILabel().then {
         $0.apply(size: 12, color: Color.lightTextColor)
     }
 
-    private lazy var createdAtLabel = UILabel().then {
+    private let createdAtLabel = UILabel().then {
         $0.apply(size: 12, color: Color.lightTextColor)
     }
 
@@ -60,12 +60,12 @@ final class ArticleCell: UICollectionViewCell, ViewConstructor {
         $0.addSubview(likeCountLabel)
     }
 
-    private lazy var likeImageView = ImageView().then {
+    private let likeImageView = ImageView().then {
         $0.image = R.image.like()?.withRenderingMode(.alwaysTemplate)
         $0.tintColor = Color.primaryColor
     }
 
-    private lazy var likeCountLabel = UILabel().then {
+    private let likeCountLabel = UILabel().then {
         $0.apply(size: 24, color: Color.primaryColor)
         $0.textAlignment = .right
     }

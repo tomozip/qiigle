@@ -11,8 +11,8 @@ import RxMoya
 import RxSwift
 
 protocol QiitaRepositoryType {
-    static func articles(query: String) -> Single<[Article]>
-    static func trends() -> Single<[Article]>
+    static func articles(query: String, page: Int) -> Single<[Article]>
+    static func trends(page: Int) -> Single<[Article]>
 }
 
 struct QiitaRepository: QiitaRepositoryType {
@@ -20,14 +20,14 @@ struct QiitaRepository: QiitaRepositoryType {
 
     private static let provider = NetworkProvider<QiitaTarget>()
 
-    static func articles(query: String) -> Single<[Article]> {
-        return provider.rx.request(.articles(query))
+    static func articles(query: String, page: Int) -> Single<[Article]> {
+        return provider.rx.request(.articles(query, page))
             .filterSuccessfulStatusCodes()
             .map([Article].self)
     }
 
-    static func trends() -> Single<[Article]> {
-        return provider.rx.request(.trends)
+    static func trends(page: Int) -> Single<[Article]> {
+        return provider.rx.request(.trends(page))
             .filterSuccessfulStatusCodes()
             .map([Article].self)
     }
