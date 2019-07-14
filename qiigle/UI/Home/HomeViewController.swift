@@ -26,6 +26,18 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
 
     // MARK: - Views
 
+    private lazy var presentingView = UIView().then {
+        $0.isHidden = true
+        $0.backgroundColor = UIColor.init(hex: "FFFFFF", alpha: 0.5)
+        $0.addSubview(presentingIndicator)
+    }
+
+    private let presentingIndicator = UIActivityIndicatorView().then {
+        $0.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
+        $0.style = UIActivityIndicatorView.Style.gray
+        $0.startAnimating()
+    }
+
     private let headerView = UIView().then {
         $0.backgroundColor = Color.primaryColor
     }
@@ -95,9 +107,16 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         view.addSubview(searchField)
         view.addSubview(collectionView)
         view.addSubview(loadingView)
+        view.addSubview(presentingView)
     }
 
     func setupViewConstraints() {
+        presentingView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        presentingIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
             $0.centerX.equalToSuperview()
@@ -174,10 +193,14 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
     }
 
     private func presentArticleVC(article: Article) {
+        presentingView.isHidden = false
+
         let articleViewController = ArticleViewController().then {
             $0.setupArticleInfo(article: article)
         }
         navigationController?.pushViewController(articleViewController, animated: true)
+
+        presentingView.isHidden = true
     }
 }
 
