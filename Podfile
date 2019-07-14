@@ -10,4 +10,5 @@ target 'qiigle' do
   pod 'ReusableKit/RxSwift'
   pod 'Then'
   pod 'R.swift'
+  pod 'SwiftyMarkdown'
 end

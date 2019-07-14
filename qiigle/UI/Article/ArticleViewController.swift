@@ -10,6 +10,7 @@ import RxSwift
 import Then
 import UIKit
 import Kingfisher
+import SwiftyMarkdown
 
 final class ArticleViewController: UIViewController, ViewConstructor {
 
@@ -18,6 +19,10 @@ final class ArticleViewController: UIViewController, ViewConstructor {
     let disposeBag = DisposeBag()
 
     // MARK: - Views
+
+    private lazy var statusBarBackView = UIView().then {
+        $0.backgroundColor = Color.lightHeaderBackColor
+    }
 
     private lazy var backButton = UIButton().then {
         $0.backgroundColor = Color.primaryColor
@@ -32,11 +37,15 @@ final class ArticleViewController: UIViewController, ViewConstructor {
         $0.tintColor = .white
     }
 
-    private lazy var scrollView = UIScrollView().then {
+    private lazy var scrollView = UIScrollView(frame: DeviceSize.screenBounds).then {
+        $0.backgroundColor = .white
         $0.addSubview(headerView)
+        $0.addSubview(markdownLabel)
     }
 
     private lazy var headerView = UIView().then {
+        $0.frame.origin = .zero
+        $0.frame.size = CGSize(width: DeviceSize.screenWidth, height: 180)
         $0.backgroundColor = Color.lightHeaderBackColor
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 20
@@ -86,6 +95,10 @@ final class ArticleViewController: UIViewController, ViewConstructor {
         $0.textAlignment = .right
     }
 
+    private lazy var markdownLabel = UILabel().then {
+        $0.numberOfLines = 0
+    }
+
     // MARK: - Life Cycle
 
     override func viewDidLoad() {
@@ -101,13 +114,18 @@ final class ArticleViewController: UIViewController, ViewConstructor {
     // MARK: - Setup Methods
 
     func setupViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = Color.lightHeaderBackColor
 
+//        view.addSubview(statusBarBackView)
         view.addSubview(scrollView)
         view.addSubview(backButton)
     }
 
     func setupViewConstraints() {
+//        statusBarBackView.snp.makeConstraints {
+//            $0.left.top.right.equalToSuperview()
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top)
+//        }
         backButton.snp.makeConstraints {
             $0.size.equalTo(CGSize(width: 32, height: 32))
             $0.left.equalToSuperview().inset(12)
@@ -119,16 +137,16 @@ final class ArticleViewController: UIViewController, ViewConstructor {
             $0.left.equalToSuperview().inset(5)
         }
         scrollView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            $0.left.right.bottom.equalToSuperview()
         }
-        headerView.snp.makeConstraints {
-            $0.left.top.equalToSuperview()
-            $0.width.equalTo(view.frame.width)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(180)
-        }
+//        headerView.snp.makeConstraints {
+//            $0.left.right.equalToSuperview()
+//            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(180)
+//        }
         titleLabel.snp.makeConstraints {
             $0.left.right.equalToSuperview().inset(12)
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(54)
+            $0.top.equalToSuperview().offset(54)
         }
         writerView.snp.makeConstraints {
             $0.left.equalToSuperview().inset(12)
@@ -159,6 +177,11 @@ final class ArticleViewController: UIViewController, ViewConstructor {
             $0.right.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
+        markdownLabel.snp.makeConstraints {
+            $0.top.equalTo(headerView.snp.bottom).offset(20)
+            $0.left.right.equalToSuperview().inset(12)
+            $0.width.equalTo(DeviceSize.screenWidth - 24)
+        }
     }
 
     func setupButtons() {
@@ -179,5 +202,11 @@ final class ArticleViewController: UIViewController, ViewConstructor {
         userNameLabel.text = article.user.id
         createdAtLabel.text = Date.from(string: article.createdAt).offsetFrom()
         likeCountLabel.attributedText = NSAttributedString(string: article.likesCount.description, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        UIView.animate(withDuration: 0, animations: { [weak self] in
+            self?.markdownLabel.attributedText = SwiftyMarkdown(string: article.body).attributedString()
+            self?.markdownLabel.sizeToFit()
+        }) { [weak self] (_) in
+            self?.scrollView.contentSize.height = self!.markdownLabel.frame.height + 220
+        }
     }
 }
