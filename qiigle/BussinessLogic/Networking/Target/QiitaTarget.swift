@@ -20,6 +20,7 @@ extension String {
 enum QiitaTarget {
     case articles(String, Int)
     case trends(Int)
+    case likes(String, Int)
 }
 
 extension QiitaTarget: TargetType {
@@ -28,6 +29,8 @@ extension QiitaTarget: TargetType {
         switch self {
         case .articles(_), .trends:
             return "/items"
+        case let .likes(id, _):
+            return "/items/\(id)/likes"
         }
     }
     var method: Moya.Method {
@@ -39,6 +42,8 @@ extension QiitaTarget: TargetType {
             return .requestParameters(parameters: ["query": query, "page": page, "per_page": "20"], encoding: URLEncoding.queryString)
         case let .trends(page):
             return .requestParameters(parameters: ["query": "stocks:>20 created:>2018-03-01", "page": page, "per_page": "20"], encoding: URLEncoding.queryString)
+        case let .likes(_, page):
+            return .requestParameters(parameters: ["page": page, "per_page": "20"], encoding: URLEncoding.queryString)
         }
     }
     var headers: [String : String]? { return nil }

@@ -16,6 +16,7 @@ struct Article: Codable {
     let title: String
     let createdAt: String
     let likesCount: Int
+    let renderedBody: String
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -24,5 +25,6 @@ struct Article: Codable {
         case title
         case createdAt = "created_at"
         case likesCount = "likes_count"
+        case renderedBody = "rendered_body"
     }
 }

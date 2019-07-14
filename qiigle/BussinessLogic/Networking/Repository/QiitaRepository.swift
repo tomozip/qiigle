@@ -13,6 +13,7 @@ import RxSwift
 protocol QiitaRepositoryType {
     static func articles(query: String, page: Int) -> Single<[Article]>
     static func trends(page: Int) -> Single<[Article]>
+    static func likes(articleId: String, page: Int) -> Single<[Like]>
 }
 
 struct QiitaRepository: QiitaRepositoryType {
@@ -30,5 +31,11 @@ struct QiitaRepository: QiitaRepositoryType {
         return provider.rx.request(.trends(page))
             .filterSuccessfulStatusCodes()
             .map([Article].self)
+    }
+
+    static func likes(articleId: String, page: Int) -> Single<[Like]> {
+        return provider.rx.request(.likes(articleId, page))
+            .filterSuccessfulStatusCodes()
+            .map([Like].self)
     }
 }

@@ -9,8 +9,6 @@
 import ReactorKit
 import RxSwift
 
-protocol HomeContentReactor {}
-
 final class HomeViewReactor: Reactor {
     enum Action {
         case changeQuery(String)

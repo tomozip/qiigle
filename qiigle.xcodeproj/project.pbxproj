@@ -30,6 +30,10 @@
 		553FF93022DB0001007310ED /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF92F22DB0001007310ED /* TextField.swift */; };
 		553FF93222DB12F7007310ED /* UIScrollView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF93122DB12F7007310ED /* UIScrollView+Extension.swift */; };
 		553FF93522DB22C5007310ED /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF93422DB22C5007310ED /* ArticleViewController.swift */; };
+		553FF93822DB613B007310ED /* LikerListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF93722DB613B007310ED /* LikerListViewController.swift */; };
+		553FF93A22DB7065007310ED /* Like.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF93922DB7065007310ED /* Like.swift */; };
+		553FF93C22DB78DF007310ED /* LikerListViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF93B22DB78DF007310ED /* LikerListViewReactor.swift */; };
+		553FF94022DB95CA007310ED /* HtmlConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553FF93F22DB95CA007310ED /* HtmlConverter.swift */; };
 		55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */; };
 		55A3E3BB22DA0C2F00D45775 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */; };
 		55A3E3BE22DA0C2F00D45775 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55A3E3BC22DA0C2F00D45775 /* LaunchScreen.storyboard */; };
@@ -218,6 +222,10 @@
 		553FF92F22DB0001007310ED /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		553FF93122DB12F7007310ED /* UIScrollView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extension.swift"; sourceTree = "<group>"; };
 		553FF93422DB22C5007310ED /* ArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewController.swift; sourceTree = "<group>"; };
+		553FF93722DB613B007310ED /* LikerListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikerListViewController.swift; sourceTree = "<group>"; };
+		553FF93922DB7065007310ED /* Like.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Like.swift; sourceTree = "<group>"; };
+		553FF93B22DB78DF007310ED /* LikerListViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikerListViewReactor.swift; sourceTree = "<group>"; };
+		553FF93F22DB95CA007310ED /* HtmlConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HtmlConverter.swift; sourceTree = "<group>"; };
 		55A3E3B022DA0C2E00D45775 /* qiigle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = qiigle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55A3E3B322DA0C2E00D45775 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		55A3E3BA22DA0C2F00D45775 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -264,6 +272,7 @@
 			children = (
 				550D2E3E22DA124800846D87 /* Home */,
 				553FF93322DB22B3007310ED /* Article */,
+				553FF93622DB6126007310ED /* LikerList */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -292,6 +301,7 @@
 			children = (
 				550D2E4F22DA174000846D87 /* User.swift */,
 				550D2E5622DA178700846D87 /* Article.swift */,
+				553FF93922DB7065007310ED /* Like.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -569,6 +579,15 @@
 			path = Article;
 			sourceTree = "<group>";
 		};
+		553FF93622DB6126007310ED /* LikerList */ = {
+			isa = PBXGroup;
+			children = (
+				553FF93722DB613B007310ED /* LikerListViewController.swift */,
+				553FF93B22DB78DF007310ED /* LikerListViewReactor.swift */,
+			);
+			path = LikerList;
+			sourceTree = "<group>";
+		};
 		55A3E3A722DA0C2E00D45775 = {
 			isa = PBXGroup;
 			children = (
@@ -611,6 +630,7 @@
 				553FF92F22DB0001007310ED /* TextField.swift */,
 				55A3E3C922DA0E6400D45775 /* Color.swift */,
 				550D2E4B22DA151500846D87 /* TextStyle.swift */,
+				553FF93F22DB95CA007310ED /* HtmlConverter.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -769,7 +789,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$SRCROOT/R.generated.swift",
+				$SRCROOT/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -842,12 +862,16 @@
 			files = (
 				550D2E5722DA178700846D87 /* Article.swift in Sources */,
 				553FF93522DB22C5007310ED /* ArticleViewController.swift in Sources */,
+				553FF93A22DB7065007310ED /* Like.swift in Sources */,
 				553FF93022DB0001007310ED /* TextField.swift in Sources */,
 				550D2E5322DA174000846D87 /* User.swift in Sources */,
 				550D2E4C22DA151500846D87 /* TextStyle.swift in Sources */,
 				550D2E5C22DA233B00846D87 /* QiitaTarget.swift in Sources */,
+				553FF93822DB613B007310ED /* LikerListViewController.swift in Sources */,
+				553FF93C22DB78DF007310ED /* LikerListViewReactor.swift in Sources */,
 				553FF93222DB12F7007310ED /* UIScrollView+Extension.swift in Sources */,
 				55A3E3D822DA0EBC00D45775 /* UIView+Extension.swift in Sources */,
+				553FF94022DB95CA007310ED /* HtmlConverter.swift in Sources */,
 				55A3E3DB22DA0EBC00D45775 /* Observable+Optional.swift in Sources */,
 				55A3E3DA22DA0EBC00D45775 /* ReactorKitView.swift in Sources */,
 				550D2E3C22DA11F400846D87 /* ViewConstructor.swift in Sources */,

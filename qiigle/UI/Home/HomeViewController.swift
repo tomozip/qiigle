@@ -135,7 +135,6 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
 
         collectionView.rx_reachedBottom.bind { [weak self] (_) in
             guard self?.reactor?.currentState.isLoadingNewPage == false else { return }
-            print("reached")
             self?.reactor?.action.onNext(.loadNewPage)
         }.disposed(by: disposeBag)
 
@@ -173,17 +172,6 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
                 self?.flowLayout.footerReferenceSize = CGSize(width: DeviceSize.screenWidth, height: (isLoading ? 100 : 0))
             }.disposed(by: disposeBag)
     }
-
-//        private func presentSubscritptionModal() {
-//            guard let reactor = reactor else { return }
-//            let subscriptionReactor = reactor.reactorForSubscriptionModal()
-//            let subscriptionModalView: SubscriptionModalViewController = .instantiate()
-//            subscriptionModalView.reactor = subscriptionReactor
-//
-//            let navigationCotroller = UINavigationController(rootViewController: subscriptionModalView)
-//
-//            navigationController?.present(navigationCotroller, animated: true)
-//        }
 
     private func presentArticleVC(article: Article) {
         let articleViewController = ArticleViewController().then {
