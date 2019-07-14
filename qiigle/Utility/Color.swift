@@ -18,6 +18,7 @@ struct Color {
     static let lightTextColor = UIColor(hex: "9E9E9E")
 
     static let textFieldBackColor = UIColor(hex: "EEEEEE")
+    static let lightHeaderBackColor = UIColor(hex: "F5F5F5")
 
     static let primaryColor = UIColor(hex: "55C500")
 //    static let primaryLightColor = UIColor(hex: "f95688")

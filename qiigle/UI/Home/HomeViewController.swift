@@ -16,10 +16,6 @@ import Kingfisher
 final class HomeViewController: UIViewController, ReactorKitView, ViewConstructor {
     typealias Reactor = HomeViewReactor
 
-    struct Const {
-        static let userCountViewHeight: CGFloat = 32
-    }
-
     struct Reusable {
         static let articleCell = ReusableCell<ArticleCell>()
     }
@@ -133,8 +129,7 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             .map { [weak self] indexPath in self?.reactor?.currentState.articles[indexPath.item] }
             .filterNil()
             .bind { [weak self] article in
-//                self?.showUserPage(user: user)
-                print(article.title)
+                self?.presentArticleVC(article: article)
             }
             .disposed(by: disposeBag)
 
@@ -151,14 +146,6 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         searchField.rx.text.orEmpty.distinctUntilChanged().subscribe { [weak self] in
             self?.reactor?.action.onNext(.changeQuery($0.element.value!))
         }.disposed(by: disposeBag)
-
-//        searchField.rx.observe(String.self, "text").distinctUntilChanged().subscribe { [weak self] in
-//            self?.reactor?.action.onNext(.changeQuery($0.element!.value!))
-//        }.disposed(by: disposeBag)
-
-//        searchField.rx.controlEvent(.valueChanged).subscribe { [weak self] in
-//            self?.reactor?.action.onNext(.changeQuery($0))
-//        }.disposed(by: disposeBag)
     }
 
     // MARK: - Bind
@@ -185,30 +172,25 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             .bind { [weak self] isLoading in
                 self?.flowLayout.footerReferenceSize = CGSize(width: DeviceSize.screenWidth, height: (isLoading ? 100 : 0))
             }.disposed(by: disposeBag)
-
-//        reactor.state.map { $0.users.count.description }
-//            .bind(to: countLabel.rx.text)
-//            .disposed(by: disposeBag)
     }
 
-    //    private func presentSubscritptionModal() {
-    //        guard let reactor = reactor else { return }
-    //        let subscriptionReactor = reactor.reactorForSubscriptionModal()
-    //        let subscriptionModalView: SubscriptionModalViewController = .instantiate()
-    //        subscriptionModalView.reactor = subscriptionReactor
-    //
-    //        let navigationCotroller = UINavigationController(rootViewController: subscriptionModalView)
-    //
-    //        navigationController?.present(navigationCotroller, animated: true)
-    //    }
-
-//    private func showUserPage(user: User) {
-//        let userPageViewController = UserPageViewController().then {
-//            $0.reactor = UserPageViewReactor(user: user)
-//        }
+//        private func presentSubscritptionModal() {
+//            guard let reactor = reactor else { return }
+//            let subscriptionReactor = reactor.reactorForSubscriptionModal()
+//            let subscriptionModalView: SubscriptionModalViewController = .instantiate()
+//            subscriptionModalView.reactor = subscriptionReactor
 //
-//        navigationController?.pushViewController(userPageViewController, animated: true)
-//    }
+//            let navigationCotroller = UINavigationController(rootViewController: subscriptionModalView)
+//
+//            navigationController?.present(navigationCotroller, animated: true)
+//        }
+
+    private func presentArticleVC(article: Article) {
+        let articleViewController = ArticleViewController().then {
+            $0.setupArticleInfo(article: article)
+        }
+        navigationController?.pushViewController(articleViewController, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDataSource
