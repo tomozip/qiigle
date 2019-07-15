@@ -18,6 +18,7 @@
 		550D2E6922DA275200846D87 /* QiitaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E6822DA275200846D87 /* QiitaRepository.swift */; };
 		550D2E6B22DA300F00846D87 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E6A22DA300F00846D87 /* ArticleCell.swift */; };
 		550D2E6E22DA400500846D87 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D2E6D22DA400500846D87 /* R.generated.swift */; };
+		553AB24A22DC299000F601CB /* ArticleViewReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553AB24922DC299000F601CB /* ArticleViewReactor.swift */; };
 		553FF87E22DAE0B8007310ED /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E5D22DA252E00846D87 /* Alamofire.framework */; };
 		553FF87F22DAE0D1007310ED /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E4522DA13CD00846D87 /* Kingfisher.framework */; };
 		553FF88022DAE0DD007310ED /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 550D2E5F22DA253B00846D87 /* Moya.framework */; };
@@ -66,6 +67,7 @@
 		550D2E6822DA275200846D87 /* QiitaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QiitaRepository.swift; sourceTree = "<group>"; };
 		550D2E6A22DA300F00846D87 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		550D2E6D22DA400500846D87 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		553AB24922DC299000F601CB /* ArticleViewReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewReactor.swift; sourceTree = "<group>"; };
 		553FF88322DAE0F5007310ED /* .Result.version */ = {isa = PBXFileReference; lastKnownFileType = text; path = .Result.version; sourceTree = "<group>"; };
 		553FF88422DAE0F5007310ED /* .Kingfisher.version */ = {isa = PBXFileReference; lastKnownFileType = text; path = .Kingfisher.version; sourceTree = "<group>"; };
 		553FF88522DAE0F5007310ED /* .Alamofire.version */ = {isa = PBXFileReference; lastKnownFileType = text; path = .Alamofire.version; sourceTree = "<group>"; };
@@ -575,6 +577,7 @@
 			isa = PBXGroup;
 			children = (
 				553FF93422DB22C5007310ED /* ArticleViewController.swift */,
+				553AB24922DC299000F601CB /* ArticleViewReactor.swift */,
 			);
 			path = Article;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				550D2E6E22DA400500846D87 /* R.generated.swift in Sources */,
 				55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */,
 				550D2E6B22DA300F00846D87 /* ArticleCell.swift in Sources */,
+				553AB24A22DC299000F601CB /* ArticleViewReactor.swift in Sources */,
 				55A3E3CD22DA0E6400D45775 /* Color.swift in Sources */,
 				55A3E3D722DA0EBC00D45775 /* UIButton+Extension.swift in Sources */,
 				55A3E3D622DA0EBC00D45775 /* UIColor+Extension.swift in Sources */,

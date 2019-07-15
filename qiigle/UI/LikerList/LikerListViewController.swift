@@ -44,6 +44,7 @@ final class LikerListViewController: UIViewController, ReactorKitView, ViewConst
     private lazy var tableView = UITableView().then {
         $0.alwaysBounceVertical = true
         $0.contentInsetAdjustmentBehavior = .never
+        $0.allowsSelection = false
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "UserCell")
         $0.register(UITableViewCell.self, forCellReuseIdentifier: "tableFooterCell")
         $0.delegate = self
@@ -160,7 +161,7 @@ extension LikerListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.contentView.addSubview(userImageView)
         userImageView.snp.makeConstraints {
             $0.size.equalTo(CGSize(width: 30, height: 30))
-            $0.left.top.bottom.equalToSuperview().inset(8)
+            $0.left.top.equalToSuperview().inset(8)
         }
 
         let userNameLabel = UILabel().then {

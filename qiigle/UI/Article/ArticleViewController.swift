@@ -7,17 +7,19 @@
 //
 
 import RxSwift
+import ReactorKit
 import Then
 import UIKit
 import Kingfisher
 import SwiftyMarkdown
 
-final class ArticleViewController: UIViewController, ViewConstructor {
+final class ArticleViewController: UIViewController, ReactorKitView, ViewConstructor {
+
+    typealias Reactor = ArticleViewReactor
 
     // MARK: - Variables
 
-    var article: Article!
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
 
     // MARK: - Views
 
@@ -194,25 +196,27 @@ final class ArticleViewController: UIViewController, ViewConstructor {
 
     private func setupFunctions() {}
 
-    func setupArticleInfo(article: Article) {
-        self.article = article
+    func bind(reactor: ArticleViewController.Reactor) {
 
-        userImageView.kf.setImage(with: URL(string: article.user.profileImageUrl))
-        titleLabel.text = article.title
-        userNameLabel.text = article.user.id
-        createdAtLabel.text = Date.from(string: article.createdAt).offsetFrom()
-        likeCountLabel.attributedText = NSAttributedString(string: article.likesCount.description, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
+        reactor.state.map { $0.article }
+            .bind { [weak self] article in
+                self?.userImageView.kf.setImage(with: URL(string: article.user.profileImageUrl))
+                self?.titleLabel.text = article.title
+                self?.userNameLabel.text = article.user.id
+                self?.createdAtLabel.text = Date.from(string: article.createdAt).offsetFrom()
+                self?.likeCountLabel.attributedText = NSAttributedString(string: article.likesCount.description, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
 
-        renderedTextLabel.attributedText = article.renderedBody.convertHtml().attributedStringWithResizedImages(with: DeviceSize.screenWidth - 24)
-        runAfterDelay(delay: 0.1) { [weak self] in
-            self?.renderedTextLabel.sizeToFit()
-            self?.scrollView.contentSize.height = self!.renderedTextLabel.frame.height + 220
-        }
+                self?.renderedTextLabel.attributedText = article.renderedBody.convertHtml().attributedStringWithResizedImages(with: DeviceSize.screenWidth - 24)
+                self?.runAfterDelay(delay: 0.1) { [weak self] in
+                    self?.renderedTextLabel.sizeToFit()
+                    self?.scrollView.contentSize.height = self!.renderedTextLabel.frame.height + 220
+                }
+            }.disposed(by: disposeBag)
     }
 
     private func presentLikerListVC() {
         let likerListViewController = LikerListViewController().then {
-            $0.reactor = LikerListViewReactor(article: article)
+            $0.reactor = LikerListViewReactor(article: reactor!.currentState.article)
         }
         navigationController?.pushViewController(likerListViewController, animated: true)
     }

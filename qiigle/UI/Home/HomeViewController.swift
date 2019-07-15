@@ -254,7 +254,7 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         presentingView.isHidden = false
 
         let articleViewController = ArticleViewController().then {
-            $0.setupArticleInfo(article: article)
+            $0.reactor = ArticleViewReactor(article: article)
         }
         navigationController?.pushViewController(articleViewController, animated: true)
 
