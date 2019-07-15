@@ -56,6 +56,31 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         $0.layer.cornerRadius = 10
     }
 
+    private lazy var searchButtonsView = UIView().then {
+        $0.addSubview(trendsButton)
+        $0.addSubview(searchButton)
+    }
+
+    private let trendsButton = UIButton().then {
+        $0.backgroundColor = .white
+        $0.layer.borderColor = Color.primaryColor.cgColor
+        $0.layer.borderWidth = 1
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 4
+        $0.setTitle(isBold: false, color: Color.primaryColor, fontSize: 14, text: "おすすめ記事")
+    }
+
+    private let searchButton = UIButton().then {
+        $0.backgroundColor = Color.primaryColor
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 4
+        $0.setTitle(color: .white, fontSize: 14, text: "検索")
+    }
+
+    private let collectionViewTitleLabel = UILabel().then {
+        $0.apply(isBold: true, size: 14, color: Color.textColor)
+    }
+
     private lazy var loadingView = UIView().then {
         $0.backgroundColor = UIColor.init(hex: "FFFFFF", alpha: 0.5)
         $0.addSubview(activityIndicator)
@@ -72,7 +97,7 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
         $0.scrollDirection = .vertical
         $0.minimumLineSpacing = ArticleCell.Const.minimumLineSpacing
         $0.minimumInteritemSpacing = ArticleCell.Const.minimumLineSpacing
-        $0.sectionInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        $0.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
         $0.footerReferenceSize = CGSize(width: DeviceSize.screenWidth, height: 0)
     }
 
@@ -105,6 +130,8 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
 
         view.addSubview(titleLabel)
         view.addSubview(searchField)
+        view.addSubview(searchButtonsView)
+        view.addSubview(collectionViewTitleLabel)
         view.addSubview(collectionView)
         view.addSubview(loadingView)
         view.addSubview(presentingView)
@@ -126,6 +153,23 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.left.right.equalToSuperview().inset(16)
         }
+        searchButtonsView.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(searchField.snp.bottom).offset(12)
+        }
+        trendsButton.snp.makeConstraints {
+            $0.size.equalTo(CGSize(width: 112, height: 34))
+            $0.left.top.bottom.equalToSuperview()
+        }
+        searchButton.snp.makeConstraints {
+            $0.size.equalTo(CGSize(width: 112, height: 34))
+            $0.left.equalTo(trendsButton.snp.right).offset(12)
+            $0.top.right.bottom.equalToSuperview()
+        }
+        collectionViewTitleLabel.snp.makeConstraints {
+            $0.left.equalToSuperview().inset(12)
+            $0.top.equalTo(searchButtonsView.snp.bottom).offset(24)
+        }
         loadingView.snp.makeConstraints {
             $0.edges.equalTo(collectionView)
         }
@@ -133,13 +177,23 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             $0.center.equalToSuperview()
         }
         collectionView.snp.makeConstraints {
-            $0.top.equalTo(searchField.snp.bottom)
+            $0.top.equalTo(collectionViewTitleLabel.snp.bottom).offset(10)
             $0.bottom.equalToSuperview()
             $0.left.right.equalToSuperview()
         }
     }
 
-    func setupButtons() {}
+    func setupButtons() {
+        searchButton.rx.tap
+            .bind { [weak self] in
+                self?.reactor?.action.onNext(.loadArticles)
+            }.disposed(by: disposeBag)
+
+        trendsButton.rx.tap
+            .bind { [weak self] in
+                self?.reactor?.action.onNext(.loadTrends)
+            }.disposed(by: disposeBag)
+    }
 
     func setupGestureRecognizers() {}
 
@@ -178,6 +232,10 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             .bind { [weak self] _ in
                 self?.collectionView.reloadData()
             }
+            .disposed(by: disposeBag)
+
+        reactor.state.map { $0.collectionViewTitle }
+            .bind(to: collectionViewTitleLabel.rx.text)
             .disposed(by: disposeBag)
 
         reactor.state.map { $0.isLoading }

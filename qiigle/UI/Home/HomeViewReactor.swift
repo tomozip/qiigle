@@ -26,6 +26,7 @@ final class HomeViewReactor: Reactor {
         case appendArticles([Article])
         case setTrends([Article])
         case setArticles([Article])
+        case setCollectionViewTitle(String)
     }
 
     struct State {
@@ -35,6 +36,7 @@ final class HomeViewReactor: Reactor {
         var articles: [Article]
         var isLoading: Bool
         var isLoadingNewPage: Bool
+        var collectionViewTitle: String
     }
 
     let initialState: State
@@ -46,7 +48,8 @@ final class HomeViewReactor: Reactor {
             trends: [],
             articles: [],
             isLoading: false,
-            isLoadingNewPage: false
+            isLoadingNewPage: false,
+            collectionViewTitle: "おすすめ記事"
         )
     }
 
@@ -66,13 +69,16 @@ final class HomeViewReactor: Reactor {
             ])
         case .loadTrends:
             return Observable.concat([
+                    Observable.just(Mutation.setCollectionViewTitle("おすすめ記事")),
                     Observable.just(Mutation.setIsLoading(true)),
                     Observable.just(Mutation.resetPage),
                     self.loadTrends(page: currentState.page).map(Mutation.setTrends),
                     Observable.just(Mutation.setIsLoading(false))
                 ])
         case .loadArticles:
+            guard !currentState.query.isEmpty else { return Observable.empty() }
             return Observable.concat([
+                Observable.just(Mutation.setCollectionViewTitle("検索結果")),
                 Observable.just(Mutation.setIsLoading(true)),
                 Observable.just(Mutation.resetPage),
                 self.loadArticles(query: currentState.query, page: currentState.page).map(Mutation.setArticles),
@@ -101,6 +107,8 @@ final class HomeViewReactor: Reactor {
         case let .setTrends(trends):
             state.trends = trends
             state.articles = trends
+        case let .setCollectionViewTitle(title):
+            state.collectionViewTitle = title
         }
 
         return state
@@ -113,12 +121,4 @@ final class HomeViewReactor: Reactor {
     private func loadTrends(page: Int) -> Observable<[Article]> {
         return QiitaRepository.trends(page: page).asObservable()
     }
-
-    //    func reactorForSubscriptionModal() -> SubscriptionModalReactor {
-    //        return SubscriptionModalReactor(provider: provider)
-    //    }
-    //
-    //    func reactorForPlaylist(playlist: Playlist, currentTrackIndex: Int) -> PlaylistReactor {
-    //        return PlaylistReactor(playlist: playlist, currentTrackIndex: currentTrackIndex, provider: provider)
-    //    }
 }
