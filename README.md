@@ -1,5 +1,7 @@
 # Qiigle
-![Qiigle](https://user-images.githubusercontent.com/26210799/61195469-2f312080-a703-11e9-963a-9f109f76beb2.gif)
+Googleのように直感的で探しやすく、Qiita記事を楽しめるようなUIのアプリを意識しました。
+![Qiigle_mid](https://user-images.githubusercontent.com/26210799/61195966-71a82c80-a706-11e9-8251-fd8e2d5a22fa.gif)
+自作のデザインファイルは`design/`以下に置いてあります。
 
 ## How to Build
 ```bash
@@ -9,7 +11,7 @@ $ carthage update --platform ios
 
 ## Features
 ###  トップページ
-トップページでは、検索をせずとも記事を楽しめるようにおすすめの記事を自動で一覧表示させるようにしました。
+トップページでは、検索窓を表示させるだけにせず、検索をせずとも記事を楽しめるようおすすめの記事を自動で一覧表示させました。
 <img src="https://i.gyazo.com/4835fc3517e723574507a2a450b1ccb6.png" alt="Image from Gyazo" width="285"/>
 
 #### 機能
@@ -40,3 +42,15 @@ $ carthage update --platform ios
 #### こだわり
 - まずユーザーを20件取得し、最下部までスクロールするとさらに20件の取得が行われるようなページング
 - 表示ユーザー数が記事のいいね数と同じになったタイミングで、これ以上不要なページングリクエストがされないよう対応
+
+
+## Architecture
+Qiigleでは[ReactorKit](https://github.com/ReactorKit/ReactorKit)を使用した Flux + ReactiveProgramming での設計を採用しました。
+また、API通信をReactiveに対応させるため、[Moya](https://github.com/Moya/Moya)を使用したAPI通信を採用しています。
+
+ReactorKitでは主に、以下２つのファイルが使用されます。
+- ViewController
+- Reactor
+例として、`qiigle/UI/Home/` 以下の`HomeViewController`と`HomeViewReactor`を見ると分かり易かと思います。
+
+ReactorKitでのAPI通信のコードも書いているので参考にしてみてください。
