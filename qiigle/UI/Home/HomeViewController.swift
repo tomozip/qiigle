@@ -239,8 +239,12 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             .disposed(by: disposeBag)
 
         reactor.state.map { $0.isLoading }
+            .distinctUntilChanged()
             .bind { [weak self] isLoading in
                 self?.loadingView.isHidden = !isLoading
+                if !isLoading {
+                    self?.collectionView.contentOffset.y = 0
+                }
             }
             .disposed(by: disposeBag)
 
