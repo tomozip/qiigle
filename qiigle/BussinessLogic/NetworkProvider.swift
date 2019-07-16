@@ -1,9 +1,9 @@
 //
 //  NetworkProvider.swift
-//  Iyashi
+//  qiigle
 //
-//  Created by nukotsuka on 2019/03/27.
-//  Copyright © 2019 Arriv, Inc. All rights reserved.
+//  Created by 島田智貴 on 2019/07/13.
+//  Copyright © 2019 Tomozip. All rights reserved.
 //
 
 import Moya
