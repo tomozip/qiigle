@@ -39,7 +39,7 @@ final class ArticleViewController: UIViewController, ReactorKitView, ViewConstru
     private lazy var scrollView = UIScrollView(frame: DeviceSize.screenBounds).then {
         $0.backgroundColor = .white
         $0.addSubview(headerView)
-        $0.addSubview(renderedTextLabel)
+        $0.addSubview(renderedTextView)
     }
 
     private lazy var headerView = UIView().then {
@@ -94,8 +94,9 @@ final class ArticleViewController: UIViewController, ReactorKitView, ViewConstru
         $0.textAlignment = .right
     }
 
-    private lazy var renderedTextLabel = UILabel().then {
-        $0.numberOfLines = 0
+    private lazy var renderedTextView = UITextView().then {
+        $0.frame = CGRect(origin: CGPoint(x: 12, y: self.headerView.frame.maxY + 20), size: CGSize(width: DeviceSize.screenWidth - 24, height: DeviceSize.screenHeight - self.headerView.frame.maxY))
+        $0.isScrollEnabled = false
     }
 
     // MARK: - Life Cycle
@@ -171,11 +172,6 @@ final class ArticleViewController: UIViewController, ReactorKitView, ViewConstru
             $0.right.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        renderedTextLabel.snp.makeConstraints {
-            $0.top.equalTo(headerView.snp.bottom).offset(20)
-            $0.left.right.equalToSuperview().inset(12)
-            $0.width.equalTo(DeviceSize.screenWidth - 24)
-        }
     }
 
     func setupButtons() {
@@ -206,10 +202,10 @@ final class ArticleViewController: UIViewController, ReactorKitView, ViewConstru
                 self?.createdAtLabel.text = Date.from(string: article.createdAt).offsetFrom()
                 self?.likeCountLabel.attributedText = NSAttributedString(string: article.likesCount.description, attributes: [.underlineStyle: NSUnderlineStyle.single.rawValue])
 
-                self?.renderedTextLabel.attributedText = article.renderedBody.convertHtml().attributedStringWithResizedImages(with: DeviceSize.screenWidth - 24)
+                self?.renderedTextView.attributedText = article.renderedBody.convertHtml().attributedStringWithResizedImages(with: DeviceSize.screenWidth - 24)
                 self?.runAfterDelay(delay: 0.1) { [weak self] in
-                    self?.renderedTextLabel.sizeToFit()
-                    self?.scrollView.contentSize.height = self!.renderedTextLabel.frame.height + 220
+                    self?.renderedTextView.sizeToFit()
+                    self?.scrollView.contentSize.height = self!.renderedTextView.frame.height + 220
                 }
             }.disposed(by: disposeBag)
     }
