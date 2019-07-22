@@ -13,7 +13,7 @@ import Then
 import UIKit
 import Kingfisher
 
-final class HomeViewController: UIViewController, ReactorKitView, ViewConstructor {
+final class HomeViewController: UIViewController, ReactorKitView, ViewConstructor, AlertPresentable {
     typealias Reactor = HomeViewReactor
 
     struct Reusable {
@@ -249,8 +249,19 @@ final class HomeViewController: UIViewController, ReactorKitView, ViewConstructo
             .disposed(by: disposeBag)
 
         reactor.state.map { $0.isLoadingNewPage }
+            .distinctUntilChanged()
             .bind { [weak self] isLoading in
                 self?.flowLayout.footerReferenceSize = CGSize(width: DeviceSize.screenWidth, height: (isLoading ? 100 : 0))
+            }.disposed(by: disposeBag)
+
+        reactor.state.map { $0.shouldAlertRetry }
+            .distinctUntilChanged()
+            .filter { $0 }
+            .bind { [weak self] _ in
+                self?.reactor?.action.onNext(.resetShouldAlertRetry)
+                self?.showAPIRetryAlert { [weak self] in
+                    self?.reactor?.action.onNext(.retryRequest)
+                }
             }.disposed(by: disposeBag)
     }
 

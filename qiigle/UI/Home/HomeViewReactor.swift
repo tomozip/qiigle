@@ -10,11 +10,20 @@ import ReactorKit
 import RxSwift
 
 final class HomeViewReactor: Reactor {
-    enum Action {
-        case changeQuery(String)
+
+    enum RequestAction {
         case loadNewPage
         case loadTrends
         case loadArticles
+    }
+
+    enum Action {
+        case changeQuery(String)
+        case retryRequest
+        case loadNewPage
+        case loadTrends
+        case loadArticles
+        case resetShouldAlertRetry
     }
 
     enum Mutation {
@@ -26,6 +35,8 @@ final class HomeViewReactor: Reactor {
         case appendArticles([Article])
         case setTrends([Article])
         case setArticles([Article])
+        case setShouldAlertRetry(Bool)
+        case setRetryableRequest(RequestAction)
         case setCollectionViewTitle(String)
     }
 
@@ -36,6 +47,8 @@ final class HomeViewReactor: Reactor {
         var articles: [Article]
         var isLoading: Bool
         var isLoadingNewPage: Bool
+        var shouldAlertRetry: Bool
+        var retryableRequest: RequestAction?
         var collectionViewTitle: String
     }
 
@@ -49,6 +62,8 @@ final class HomeViewReactor: Reactor {
             articles: [],
             isLoading: false,
             isLoadingNewPage: false,
+            shouldAlertRetry: false,
+            retryableRequest: nil,
             collectionViewTitle: "おすすめ記事"
         )
     }
@@ -57,12 +72,16 @@ final class HomeViewReactor: Reactor {
         switch action {
         case let .changeQuery(query):
             return Observable.just(Mutation.setQuery(query))
+        case .retryRequest:
+            retryAPIRequest()
+            return Observable.empty()
         case .loadNewPage:
             return Observable.concat([
                 Observable.just(Mutation.setIsLoadingNewPage(true)),
+                Observable.just(Mutation.setRetryableRequest(.loadNewPage)),
                 (currentState.query.isEmpty ?
-                    loadTrends(page: currentState.page + 1).map(Mutation.appendArticles) :
-                    loadArticles(query: currentState.query, page: currentState.page + 1).map(Mutation.appendArticles)
+                    loadTrends(page: currentState.page + 1).map(Mutation.appendArticles).catchErrorJustReturn(Mutation.setShouldAlertRetry(true)) :
+                    loadArticles(query: currentState.query, page: currentState.page + 1).map(Mutation.appendArticles).catchErrorJustReturn(Mutation.setShouldAlertRetry(true))
                 ),
                 Observable.just(Mutation.increasePage),
                 Observable.just(Mutation.setIsLoadingNewPage(false))
@@ -72,7 +91,10 @@ final class HomeViewReactor: Reactor {
                     Observable.just(Mutation.setCollectionViewTitle("おすすめ記事")),
                     Observable.just(Mutation.setIsLoading(true)),
                     Observable.just(Mutation.resetPage),
-                    self.loadTrends(page: currentState.page).map(Mutation.setTrends),
+                    Observable.just(Mutation.setRetryableRequest(.loadTrends)),
+                    self.loadTrends(page: currentState.page)
+                        .map(Mutation.setTrends)
+                        .catchErrorJustReturn(Mutation.setShouldAlertRetry(true)),
                     Observable.just(Mutation.setIsLoading(false))
                 ])
         case .loadArticles:
@@ -81,9 +103,14 @@ final class HomeViewReactor: Reactor {
                 Observable.just(Mutation.setCollectionViewTitle("検索結果")),
                 Observable.just(Mutation.setIsLoading(true)),
                 Observable.just(Mutation.resetPage),
-                self.loadArticles(query: currentState.query, page: currentState.page).map(Mutation.setArticles),
+                Observable.just(Mutation.setRetryableRequest(.loadArticles)),
+                self.loadArticles(query: currentState.query, page: currentState.page)
+                    .map(Mutation.setArticles)
+                    .catchErrorJustReturn(Mutation.setShouldAlertRetry(true)),
                 Observable.just(Mutation.setIsLoading(false))
             ])
+        case .resetShouldAlertRetry:
+            return Observable.just(Mutation.setShouldAlertRetry(false))
         }
     }
 
@@ -107,11 +134,25 @@ final class HomeViewReactor: Reactor {
         case let .setTrends(trends):
             state.trends = trends
             state.articles = trends
+        case let .setShouldAlertRetry(shouldAlert):
+            state.shouldAlertRetry = shouldAlert
+        case let .setRetryableRequest(requestAction):
+            state.retryableRequest = requestAction
         case let .setCollectionViewTitle(title):
             state.collectionViewTitle = title
         }
 
         return state
+    }
+
+    private func retryAPIRequest() {
+        guard let retryableRequest = currentState.retryableRequest else { return }
+
+        switch retryableRequest {
+        case .loadNewPage:  action.onNext(.loadNewPage)
+        case .loadTrends:   action.onNext(.loadTrends)
+        case .loadArticles: action.onNext(.loadArticles)
+        }
     }
 
     private func loadArticles(query: String, page: Int) -> Observable<[Article]> {
