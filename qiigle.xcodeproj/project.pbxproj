@@ -45,6 +45,7 @@
 		55A3E3D822DA0EBC00D45775 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D122DA0EBC00D45775 /* UIView+Extension.swift */; };
 		55A3E3DA22DA0EBC00D45775 /* ReactorKitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D322DA0EBC00D45775 /* ReactorKitView.swift */; };
 		55A3E3DB22DA0EBC00D45775 /* Observable+Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A3E3D522DA0EBC00D45775 /* Observable+Optional.swift */; };
+		55C0E86E22E5C28200875BA8 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C0E86D22E5C28200875BA8 /* AlertPresentable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -240,6 +241,7 @@
 		55A3E3D122DA0EBC00D45775 /* UIView+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		55A3E3D322DA0EBC00D45775 /* ReactorKitView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReactorKitView.swift; sourceTree = "<group>"; };
 		55A3E3D522DA0EBC00D45775 /* Observable+Optional.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Observable+Optional.swift"; sourceTree = "<group>"; };
+		55C0E86D22E5C28200875BA8 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		FC6395D909C4A9361610CE0A /* Pods-qiigle.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-qiigle.release.xcconfig"; path = "Target Support Files/Pods-qiigle/Pods-qiigle.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -630,6 +632,7 @@
 			isa = PBXGroup;
 			children = (
 				55A3E3C622DA0E6400D45775 /* DeviceSize.swift */,
+				55C0E86D22E5C28200875BA8 /* AlertPresentable.swift */,
 				553FF92F22DB0001007310ED /* TextField.swift */,
 				55A3E3C922DA0E6400D45775 /* Color.swift */,
 				550D2E4B22DA151500846D87 /* TextStyle.swift */,
@@ -885,6 +888,7 @@
 				550D2E4022DA125100846D87 /* HomeViewController.swift in Sources */,
 				550D2E6E22DA400500846D87 /* R.generated.swift in Sources */,
 				55A3E3B422DA0C2E00D45775 /* AppDelegate.swift in Sources */,
+				55C0E86E22E5C28200875BA8 /* AlertPresentable.swift in Sources */,
 				550D2E6B22DA300F00846D87 /* ArticleCell.swift in Sources */,
 				553AB24A22DC299000F601CB /* ArticleViewReactor.swift in Sources */,
 				55A3E3CD22DA0E6400D45775 /* Color.swift in Sources */,
